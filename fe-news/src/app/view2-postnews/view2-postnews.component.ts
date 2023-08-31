@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./view2-postnews.component.scss']
 })
 export class View2PostnewsComponent implements OnInit{
+
+  @ViewChild('imageInput') imageInput!: ElementRef;
 
   articleForm!: FormGroup;
   tagsArray: string[] = [];
@@ -26,7 +28,17 @@ export class View2PostnewsComponent implements OnInit{
 
   handleArticleSubmit() {
     this.articleForm.value.tags = [...this.tagsArray];
-    console.log(this.articleForm.value);
+    const formData = new FormData();
+    formData.set('title', this.articleForm.value.title);
+    formData.set('photo', this.imageInput.nativeElement.files[0]);
+    formData.set('description', this.articleForm.value.description);
+    formData.set('tags', this.articleForm.value.tags);
+
+    console.log(formData.forEach(v => console.log(v)));
+    // firstVaulueFrom(
+    //   this.http.post('http://localhost:8080/upload', formData)
+    //   ).then(() => {  })
+    //   .catch((error) => {  })
   }
 
   goToView0() {

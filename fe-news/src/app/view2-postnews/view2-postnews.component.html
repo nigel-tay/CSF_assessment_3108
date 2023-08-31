@@ -1,13 +1,16 @@
 <div class="form_container">
     <h1>Share a news</h1>
-    <form [formGroup]="articleForm" (ngSubmit)="handleArticleSubmit()">
+    <form 
+        [formGroup]="articleForm" 
+        (ngSubmit)="handleArticleSubmit()"
+        >
         <div class="input_row">
             <h3>Title:</h3>
             <input type="text" formControlName="title">
         </div>
         <div class="input_row">
             <h3>Photo:</h3>
-            <input type="text" formControlName="photo">
+            <input type="file" formControlName="photo" #imageInput>
         </div>
         <div class="input_row">
             <h3>Description:</h3>
