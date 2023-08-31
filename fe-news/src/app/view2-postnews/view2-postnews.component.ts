@@ -40,6 +40,10 @@ export class View2PostnewsComponent implements OnInit{
     formData.set('tags', this.articleForm.value.tags);
 
     this.aService.postArticleToSpringBoot(formData);
+    console.log(formData.get('title'))
+    console.log(formData.get('photo'))
+    console.log(formData.get('description'))
+    console.log(formData.get('tags'))
   }
 
   goToView0() {

@@ -1,6 +1,7 @@
 <div class="form_container">
     <h1>Share a news</h1>
     <form 
+        enctype="multipart/form-data"
         [formGroup]="articleForm" 
         (ngSubmit)="handleArticleSubmit()"
         >
