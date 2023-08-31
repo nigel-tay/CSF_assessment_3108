@@ -30,7 +30,7 @@
         </div>
         <div class="button_container">
             <button type="button" (click)="goToView0()">Back</button>
-            <button type="submit">Post News</button>
+            <button type="submit" [disabled]="!articleForm.valid">Post News</button>
         </div>
     </form>
 </div>

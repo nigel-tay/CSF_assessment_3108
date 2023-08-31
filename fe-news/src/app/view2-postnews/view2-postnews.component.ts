@@ -14,6 +14,7 @@ export class View2PostnewsComponent implements OnInit{
 
   articleForm!: FormGroup;
   tagsArray: string[] = [];
+  newsId: string = "";
 
   constructor(
     private fb: FormBuilder, 
@@ -40,11 +41,17 @@ export class View2PostnewsComponent implements OnInit{
     formData.set('tags', this.articleForm.value.tags);
 
     this.aService.postArticleToSpringBoot(formData)
-    .subscribe(data => console.log(data));
-    console.log(formData.get('title'))
-    console.log(formData.get('photo'))
-    console.log(formData.get('description'))
-    console.log(formData.get('tags'))
+    .subscribe(data => {
+      let jsonObj = JSON.stringify(data);
+      if (JSON.parse(jsonObj)['newsId'].length <= 0 ) {
+        alert(`You've got an error: ${JSON.parse(jsonObj)['error']}`)
+      }
+      else {
+        alert(`This is the objectId from the article you've just posted ${JSON.parse(jsonObj)['newsId']}`);
+        this.router.navigate(['/']);
+      }
+
+    });
   }
 
   goToView0() {
