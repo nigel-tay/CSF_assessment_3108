@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ArticleService } from '../article.service';
 
 @Component({
   selector: 'app-view2-postnews',
@@ -14,7 +15,11 @@ export class View2PostnewsComponent implements OnInit{
   articleForm!: FormGroup;
   tagsArray: string[] = [];
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private fb: FormBuilder, 
+    private router: Router,
+    private aService: ArticleService
+    ) {}
 
 
   ngOnInit(): void {
@@ -34,11 +39,7 @@ export class View2PostnewsComponent implements OnInit{
     formData.set('description', this.articleForm.value.description);
     formData.set('tags', this.articleForm.value.tags);
 
-    console.log(formData.forEach(v => console.log(v)));
-    // firstVaulueFrom(
-    //   this.http.post('http://localhost:8080/upload', formData)
-    //   ).then(() => {  })
-    //   .catch((error) => {  })
+    this.aService.postArticleToSpringBoot(formData);
   }
 
   goToView0() {
@@ -47,5 +48,9 @@ export class View2PostnewsComponent implements OnInit{
 
   addTags() {
     this.tagsArray = [... new Set(this.articleForm.value.tags.trim().split(' '))] as string[];
+  }
+
+  removeTag(tag: string) {
+    this.tagsArray = [...this.tagsArray.filter(ele => ele !== tag)]
   }
 }

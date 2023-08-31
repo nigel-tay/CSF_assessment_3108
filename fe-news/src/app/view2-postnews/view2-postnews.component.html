@@ -22,7 +22,10 @@
             <button type="button" (click)="addTags()"> + </button>
         </div>
         <div class="tags_container">
-            <div *ngFor="let tag of tagsArray" class="individual_tag">{{tag}}</div>
+            <div *ngFor="let tag of tagsArray" 
+                class="individual_tag"
+                (click)="removeTag(tag)"
+                >{{tag}}</div>
         </div>
         <div class="button_container">
             <button type="button" (click)="goToView0()">Back</button>
