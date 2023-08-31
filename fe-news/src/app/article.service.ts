@@ -12,7 +12,7 @@ export class ArticleService {
 
   postArticleToSpringBoot(formData: FormData) {
     return this.http.post<string>(
-      'http://localhost:8080/receiveform',
+      '/receiveform',
       formData, 
       {responseType: 'json'});
   }
@@ -20,7 +20,7 @@ export class ArticleService {
   getTagsWithCount(selectedMinute: string) {
     let params = new HttpParams().set('minute', selectedMinute);
     return this.http.get<string>(
-      'http://localhost:8080/gettagswithcount',
+      '/gettagswithcount',
       {params: params}
     )
   }
