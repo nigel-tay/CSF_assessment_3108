@@ -1,0 +1,29 @@
+<div class="form_container">
+    <h1>Share a news</h1>
+    <form [formGroup]="articleForm" (ngSubmit)="handleArticleSubmit()">
+        <div class="input_row">
+            <h3>Title:</h3>
+            <input type="text" formControlName="title">
+        </div>
+        <div class="input_row">
+            <h3>Photo:</h3>
+            <input type="text" formControlName="photo">
+        </div>
+        <div class="input_row">
+            <h3>Description:</h3>
+            <input type="text" formControlName="description">
+        </div>
+        <div class="input_row">
+            <h3>Tags:</h3>
+            <input type="text" formControlName="tags">
+            <button type="button" (click)="addTags()"> + </button>
+        </div>
+        <div class="tags_container">
+            <div *ngFor="let tag of tagsArray" class="individual_tag">{{tag}}</div>
+        </div>
+        <div class="button_container">
+            <button type="button" (click)="goToView0()">Back</button>
+            <button type="submit">Post News</button>
+        </div>
+    </form>
+</div>
