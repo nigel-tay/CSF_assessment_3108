@@ -1,1 +1,13 @@
-<p>view0-hashtags works!</p>
+<div>
+    <div>
+        <h3>Time</h3>
+        <form [formGroup]="timeForm">
+            <select id="time" formControlName="minutes">
+                <option 
+                    *ngFor="let timeValue of timeArray"
+                    [value]="timeValue"
+                    >{{timeValue}}</option>
+            </select>
+        </form>
+    </div>
+</div>
