@@ -11,5 +11,8 @@
             </select>
             <button>Post News</button>
         </form>
+        <div *ngFor="let tags of tagsWithCount" (click)="goToTagArticles(tags)">
+            {{tags}}
+        </div>
     </div>
 </div>

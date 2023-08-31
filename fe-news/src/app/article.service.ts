@@ -19,7 +19,7 @@ export class ArticleService {
 
   getTagsWithCount(selectedMinute: string) {
     let params = new HttpParams().set('minute', selectedMinute);
-    return this.http.get(
+    return this.http.get<string>(
       'http://localhost:8080/gettagswithcount',
       {params: params}
     )

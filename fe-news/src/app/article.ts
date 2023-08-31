@@ -1,6 +1,6 @@
 export interface Article {
     title: string;
-    photo: File;
+    photo: string;
     description: string;
     tags: string[];
 }

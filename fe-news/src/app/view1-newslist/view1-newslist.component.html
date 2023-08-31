@@ -1,1 +1,15 @@
-<p>view1-newslist works!</p>
+<div class="news_article_container">
+    <h1>List of News with #{{tagParam}}</h1>
+    <button type="button" (click)="backtoViewZero()">Back</button>
+    <button type="button" (click)="goToView2()">Post News</button>
+    <div>
+        <div *ngFor="let article of articleList">
+            <h1>{{article.title}}</h1>
+            <img src="{{article.photo}}" alt="article photo">
+            <p>{{article.description}}</p>
+            <p *ngFor="let tag of article.tags">
+                {{tag}}
+            </p>
+        </div>
+    </div>
+</div>

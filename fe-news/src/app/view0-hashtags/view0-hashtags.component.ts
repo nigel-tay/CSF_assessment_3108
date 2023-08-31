@@ -13,7 +13,7 @@ export class View0HashtagsComponent implements OnInit{
   timeArray: string[] = ['5', '15', '30', '45', '60'];
   timeForm!: FormGroup;
   currentMinutes: string = '5';
-  tagsWithCount!: Tag[];
+  tagsWithCount!: string[];
 
   constructor(
     private fb: FormBuilder, 
@@ -26,6 +26,13 @@ export class View0HashtagsComponent implements OnInit{
       minutes: this.fb.control(this.timeArray[0])
     });
     this.aService.getTagsWithCount(this.currentMinutes)
+      .subscribe(v => {
+        let jsonString = JSON.stringify(v)
+        let jsonObject = JSON.parse(jsonString)
+        for (let obj in jsonObject) {
+          this.tagsWithCount.push(obj);
+        }
+      })
   }
 
   assignMinutes(timeValue: string) {
@@ -38,5 +45,7 @@ export class View0HashtagsComponent implements OnInit{
     this.router.navigate(['/view2'])
   }
 
-
+  goToTagArticles(tags: any) {
+    this.router.navigate(['/view1', tags])
+  }
 }
