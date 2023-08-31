@@ -1,13 +1,15 @@
 <div>
     <div>
         <h3>Time</h3>
-        <form [formGroup]="timeForm">
-            <select id="time" formControlName="minutes">
+        <form [formGroup]="timeForm" (ngSubmit)="getTags()">
+            <select id="time" formControlName="minutes" (ngModelChange)="assignMinutes($event)">
                 <option 
                     *ngFor="let timeValue of timeArray"
                     [value]="timeValue"
+                    (click)="assignMinutes(timeValue)"
                     >{{timeValue}}</option>
             </select>
+            <button>Post News</button>
         </form>
     </div>
 </div>

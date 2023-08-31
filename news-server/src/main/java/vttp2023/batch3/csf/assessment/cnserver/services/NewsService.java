@@ -2,8 +2,10 @@ package vttp2023.batch3.csf.assessment.cnserver.services;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +49,20 @@ public class NewsService {
 	// Do not change the method name and the return type
 	// You may add any number of parameters
 	// Returns a list of tags and their associated count
-	public List<TagCount> getTags(/* Any number of parameters */) {
-		return new LinkedList<>();
+	public List<TagCount> getTags(String minute) {
+		Long longMinute = Long.parseLong(Integer.toString((Integer.parseInt(minute) * 60 * 1000)));
+		Long now = new Date().getTime();
+		Long delimiter = new Date().getTime() - longMinute;
+
+		List<TagCount> ll = new LinkedList<>();
+		nRepo.getTagsWithCount(now, delimiter)
+				.stream()
+				.forEach(d -> {
+						TagCount tc = new TagCount(d.getString(ll), d.getInteger("count"));
+						ll.add(tc);
+					}
+				);
+		return ll;
 	}
 
 	// TODO: Task 3

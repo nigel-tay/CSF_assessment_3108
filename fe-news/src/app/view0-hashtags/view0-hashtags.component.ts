@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Tag } from '../tag';
+import { ArticleService } from '../article.service';
 
 @Component({
   selector: 'app-view0-hashtags',
@@ -9,13 +12,30 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class View0HashtagsComponent implements OnInit{
   timeArray: string[] = ['5', '15', '30', '45', '60'];
   timeForm!: FormGroup;
+  currentMinutes: string = '5';
+  tagsWithCount!: Tag[];
 
-  constructor(private fb: FormBuilder){ }
+  constructor(
+    private fb: FormBuilder, 
+    private router: Router,
+    private aService: ArticleService
+    ){ }
 
   ngOnInit(): void {
     this.timeForm = this.fb.group({
       minutes: this.fb.control(this.timeArray[0])
     });
+    this.aService.getTagsWithCount(this.currentMinutes)
+  }
+
+  assignMinutes(timeValue: string) {
+    this.currentMinutes = timeValue;
+    this.aService.getTagsWithCount(this.currentMinutes)
+        .subscribe(v => console.log(v));
+  }
+
+  getTags() {
+    this.router.navigate(['/view2'])
   }
 
 

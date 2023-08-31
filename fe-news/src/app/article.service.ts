@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -15,5 +15,13 @@ export class ArticleService {
       'http://localhost:8080/receiveform',
       formData, 
       {responseType: 'json'});
+  }
+
+  getTagsWithCount(selectedMinute: string) {
+    let params = new HttpParams().set('minute', selectedMinute);
+    return this.http.get(
+      'http://localhost:8080/gettagswithcount',
+      {params: params}
+    )
   }
 }
