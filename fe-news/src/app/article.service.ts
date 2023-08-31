@@ -11,7 +11,9 @@ export class ArticleService {
   ) { }
 
   postArticleToSpringBoot(formData: FormData) {
-    this.http.post('http://localhost:8080/receiveform', formData)
-      .subscribe(data => console.log(data));
+    return this.http.post(
+      'http://localhost:8080/receiveform',
+      formData, 
+      {responseType: 'json'});
   }
 }

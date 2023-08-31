@@ -1,7 +1,6 @@
 package vttp2023.batch3.csf.assessment.cnserver.controllers;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
-import vttp2023.batch3.csf.assessment.cnserver.models.News;
 import vttp2023.batch3.csf.assessment.cnserver.services.NewsService;
 
 @RestController
@@ -49,8 +47,11 @@ public class NewsController {
 								.add("image", "https://fredbarney.sgp1.cdn.digitaloceanspaces.com/"+uuid)
 								.add("tags", Json.createArrayBuilder(tagsList))
 								.build();
-
-		return ResponseEntity.ok(jo.toString());
+			String objectId = nService.postNews(jo);
+			JsonObject outgoingJo = Json.createObjectBuilder()
+										.add("newsId", objectId)
+										.build();
+		return ResponseEntity.ok(outgoingJo.toString());
 	}
 
 	// TODO: Task 2
